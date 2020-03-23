@@ -257,3 +257,61 @@ https://www.vuemastery.com/courses/intro-to-vue-js/vue-instance
       }
     }
     ```
+
+### Lesson 8: Components
+
+* Base example:
+
+  * Define a new component called button-counter
+    ``` 
+    Vue.component('button-counter', {
+      data: function () {
+        return {
+          count: 0
+        }
+      },
+      template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
+    })
+    ```
+
+  * Components are reusable Vue instances with a name: in this case, `<button-counter>`. We can use this component as a custom element inside a root Vue instance created with `new Vue`:
+
+    ```
+      <div id="components-demo">
+        <button-counter></button-counter>
+      </div>
+    ```
+    ```
+      new Vue({ el: '#components-demo' })
+    ```
+
+* Components accept the same options as `new Vue`, such as `data`, `computed`, `watch`, `methods`, and lifecycle hooks. The only exceptions are a few root-specific options like `el`.
+
+* `data` option MUST be a function, so that each instance can maintain an independent copy of the returned data object:
+
+    ```
+    data: function () {
+      return {
+        count: 0
+      }
+    }
+    ```
+
+* `props` 
+  * We pass data to child components using `props`!
+  
+  ```
+  Vue.component('blog-post', {
+    props: ['title'],
+    template: '<h3>{{ title }}</h3>'
+  })
+  ```
+  
+  ```
+  <blog-post title="My journey with Vue"></blog-post>
+  <blog-post title="Blogging with Vue"></blog-post>
+  <blog-post title="Why Vue is so fun"></blog-post>
+  ```
+  * [Passing Data to Child Components with Props](https://vuejs.org/v2/guide/components.html#Passing-Data-to-Child-Components-with-Props)
+  * [Component props](https://vuejs.org/v2/guide/components-props.html)
+  

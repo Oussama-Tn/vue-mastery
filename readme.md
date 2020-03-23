@@ -199,3 +199,61 @@ https://www.vuemastery.com/courses/intro-to-vue-js/vue-instance
 
 * ... [Read more](https://vuejs.org/v2/guide/class-and-style.html#Object-Syntax-1)
 
+### Lesson 7: Computed properties
+
+* Computed properties are cached until its dependency is changed
+  ```
+  <h1>{{ title }}</h1>
+  ```
+
+  ``` 
+    computed: {
+      title() {
+        return this.brand + ' ' + this.product;
+      }
+    }
+  ```
+
+* We update our code to make `inStock` and `image` computed properties. Now these properties depend on variant
+
+    ``` 
+    <div class="product-image">
+        <img v-bind:src="image" v-bind:alt="product">
+    </div>
+    
+    <p v-if="inStock > 10">In stock</p>
+    <p v-else="inStock <= 10 && inStock > 0">Almost sold out</p>
+    <p v-else>Out of stock</p>
+
+    <div v-for="(variant, index) in variants"
+         :key="variant.variantId"
+         class="color-box"
+         :style="{ 'background-color':variant.variantColor }"
+         @mouseover="updateProduct(index)">
+    </div>
+    ```
+
+    ```
+    variants: [
+      {
+        variantId: 2214,
+        variantColor: "Green",
+        variantImage: `./assets/vmSocks-green-onWhite.jpg`,
+        variantQuantity: 9
+      },
+      {
+        variantId: 2215,
+        variantColor: "Blue",
+        variantImage: `./assets/vmSocks-blue-onWhite.jpg`,
+        variantQuantity: 0
+      }
+    ],
+    computed: {
+      image: function() {
+        return this.variants[this.selectedVariant].variantImage;
+      },
+      inStock() {
+        return this.variants[this.selectedVariant].variantQuantity;
+      }
+    }
+    ```

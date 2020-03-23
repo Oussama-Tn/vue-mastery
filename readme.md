@@ -161,3 +161,41 @@ https://www.vuemastery.com/courses/intro-to-vue-js/vue-instance
       }
     ],
     ```
+
+### Lesson 6: Style binding
+
+* The object syntax for `v-bind:style` is pretty straightforward - it looks almost like `CSS`, except it’s a `JavaScript object`. You can use either `camelCase` or `kebab-case (use quotes with kebab-case)` for the CSS property names:
+
+    * `:style="{ 'background-color':variant.variantColor }"`
+    * `:style="{ backgroundColor:variant.variantColor }"`
+
+* It is often a good idea to bind to a style object directly so that the template is cleaner:
+
+    ```
+    <div v-bind:style="styleObject"></div>
+    ```
+    ```
+    data: {
+      styleObject: {
+        color: 'red',
+        fontSize: '13px'
+      }
+    }
+    ```
+
+* `Array syntax`: The array syntax for `v-bind:style` allows you to apply multiple style objects to the same element:
+
+    `<div v-bind:style="[baseStyles, overridingStyles]"></div>`
+
+* If you would like to also toggle a class in the list conditionally, you can do it with a ternary expression:
+
+    `<div v-bind:class="[isActive ? activeClass : '', errorClass]"></div>`
+    
+    * This will always apply `errorClass`, but will only apply `activeClass` when `isActive` is truthy.
+      
+        * However, this can be a bit verbose if you have multiple conditional classes. That’s why it’s also possible to use the `object syntax` inside `array syntax`:
+
+            `<div v-bind:class="[{ active: isActive }, errorClass]"></div>`
+
+* ... [Read more](https://vuejs.org/v2/guide/class-and-style.html#Object-Syntax-1)
+

@@ -314,4 +314,29 @@ https://www.vuemastery.com/courses/intro-to-vue-js/vue-instance
   ```
   * [Passing Data to Child Components with Props](https://vuejs.org/v2/guide/components.html#Passing-Data-to-Child-Components-with-Props)
   * [Component props](https://vuejs.org/v2/guide/components-props.html)
-  
+
+### Lesson 9: Comunicating events
+
+* Checkout commit `Lesson 9` for more details.
+
+  * Child: We emit method name and variantId
+    ```
+    methods: {
+        addToCart: function() {
+          this.$emit('add-to-cart', this.variants[this.selectedVariant].variantId);
+        }
+      },
+    ```
+  * Parent component: 
+    ```
+    <product @add-to-cart="updateCart"></product>
+    ```
+    
+    ``` 
+    methods: {
+        updateCart(id) {
+          this.cart.push(id);
+        }
+      }
+    ```
+* [Listening to Child Components Events](https://vuejs.org/v2/guide/components.html#Listening-to-Child-Components-Events)

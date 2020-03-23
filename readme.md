@@ -74,3 +74,43 @@ https://www.vuemastery.com/courses/intro-to-vue-js/vue-instance
 * v-show: `<h1 v-show="showMsg">Hello!</h1>` much simpler - the element is always rendered regardless of initial condition, with CSS-based toggling
   
     > Generally speaking, `v-if` has higher toggle costs while v-show has higher initial render costs. So prefer `v-show` if you need to toggle something very often, and prefer `v-if` if the condition is unlikely to change at runtime.
+
+### Lesson 4: List rendering
+
+* v-for: Expects: Array | Object | number | string | Iterable (since 2.6)
+
+    ```
+        <ul>
+            <li v-for="detail in details">{{ detail }}</li>
+        </ul> 
+    ```
+
+    ``` 
+      data: {
+        product: `Socks`,
+        image: `./assets/vmSocks-blue-onWhite.jpg`,
+        inventory: 9,
+        details: ["80% cotton", "20% polyster", "Gender-neutral"]
+      }
+    ```
+
+* The default behavior of `v-for` will try to patch the elements in-place without moving them. To force it to reorder elements, you need to provide an ordering hint with the `key` special attribute:
+
+    ```
+        <div v-for="variant in variants" :key="variant.variantId">
+            <p>{{ variant.variantColor }}</p>
+        </div>
+    ```
+
+    ```
+    variants: [
+      {
+        variantId: 2214,
+        variantColor: "Green",
+      },
+      {
+        variantId: 2215,
+        variantColor: "Blue",
+      }
+    ]
+    ```

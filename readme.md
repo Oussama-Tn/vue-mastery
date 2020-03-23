@@ -41,11 +41,12 @@ https://www.vuemastery.com/courses/intro-to-vue-js/vue-instance
 #### Lesson 2: Attribute binding
 
 *`v-bind`: Dynamically binds an attribute to an expression.
+  * Shorthand: `:`
   * `<img v-bind:src="image">`
     * `src` : is the attribute
     * `image` : is the expression
 
-  * When using `v-bind` with attributes, there is a shorthand
+  * When using `v-bind` with attributes, there is a shorthand `:`
     * `v-bind:src="image"` becomes `:src="image"`
       * `:alt="description"`
       * `:href="url"`
@@ -77,7 +78,7 @@ https://www.vuemastery.com/courses/intro-to-vue-js/vue-instance
 
 ### Lesson 4: List rendering
 
-* v-for: Expects: Array | Object | number | string | Iterable (since 2.6)
+* v-for: Expects: `Array` | `Object` | `number` | `string` | `Iterable` (since 2.6)
 
     ```
         <ul>
@@ -113,4 +114,50 @@ https://www.vuemastery.com/courses/intro-to-vue-js/vue-instance
         variantColor: "Blue",
       }
     ]
+    ```
+
+### Lesson 5: Event handling
+
+* v-on:
+  * Shorthand: `@`
+  * Expects: `Function` | `Inline Statement` | `Object`
+
+* Example : `click`
+```
+    <button v-on:click="addToCart">Add to cart</button>
+
+    <div class="cart">
+        <p>Cart({{ cart }})</p>
+    </div>
+```
+
+```
+  methods: {
+    addToCart: function() {
+      this.cart += 1;
+    }
+  }
+```
+
+* Example: `mouseover`
+
+    ```
+    <div v-for="variant in variants" :key="variant.variantId">
+        <p @mouseover="updateProduct(variant.variantImage)">{{ variant.variantColor }}</p>
+    </div>
+    ```
+
+    ```
+    variants: [
+      {
+        variantId: 2214,
+        variantColor: "Green",
+        variantImage: `./assets/vmSocks-green-onWhite.jpg`
+      },
+      {
+        variantId: 2215,
+        variantColor: "Blue",
+        variantImage: `./assets/vmSocks-blue-onWhite.jpg`
+      }
+    ],
     ```

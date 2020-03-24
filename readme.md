@@ -340,3 +340,52 @@ https://www.vuemastery.com/courses/intro-to-vue-js/vue-instance
       }
     ```
 * [Listening to Child Components Events](https://vuejs.org/v2/guide/components.html#Listening-to-Child-Components-Events)
+
+### Lesson 10: Forms
+
+* `v-model`: Create a **two-way binding** on a form input element or a component. 
+    * limited to:
+    `<input>`
+    `<select>`
+    `<textarea>`
+    `components`
+    * Modifiers
+      * `.lazy` - listen to change events instead of input
+      * `.number` - cast valid input string to numbers
+      * `.trim` - trim input
+
+* Example:
+  * `@submit.prevent="onSubmit"` use `.prevent` to prevent form submission
+    ```
+    <product-review></product-review>
+    ```
+    
+    ```
+    Vue.component('product-review', {
+      template: `
+      <form @submit.prevent="onSubmit">
+          <input v-model="name">
+          <select v-model.number="rating">
+            <option></option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+          </select>
+          <input type="submit" value="Submit">
+      </form>
+      `,
+      data() {
+        return {
+          name: null
+        }
+      },
+      methods: {
+        onSubmit() {
+          // do something ...
+          // emit event+data to parent component
+        }
+      }
+    })
+    ```
+
+* For more info, check commit `1-IntroToVuejs: Forms` on this repository. (_Validate form, emit event+data to parent component, append review to existing reviews..._)

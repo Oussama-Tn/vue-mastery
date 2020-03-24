@@ -389,3 +389,22 @@ https://www.vuemastery.com/courses/intro-to-vue-js/vue-instance
     ```
 
 * For more info, check commit `1-IntroToVuejs: Forms` on this repository. (_Validate form, emit event+data to parent component, append review to existing reviews..._)
+
+### Lesson 11: Tabs
+
+* In this lesson :
+    * We created new component `product-tabs`. 
+    * Moved `reviews` and `review-form` to this component. 
+    * Finally, we sent event+data from grand child `product-tabs` to `product` through new Vue instance `eventBus`
+
+* Use `eventBus` (new instance of Vue) to get event from grand child. Usually we get event from childs only.
+  * `vm.$on` ( `event`, `callback` )
+    * Listen for a custom event on the current vm. Events can be triggered by vm.$emit. The callback will receive all the additional arguments passed into these event-triggering methods
+    
+        ```
+        vm.$on('test', function (msg) {
+          console.log(msg)
+        })
+        vm.$emit('test', 'hi')
+        // => "hi"
+        ```

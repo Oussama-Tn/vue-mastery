@@ -12,7 +12,7 @@ https://www.vuemastery.com/courses/intro-to-vue-js/vue-instance
 
 * Install `Vuejs devtools` on chrome
 
-    ```
+    ```vue
     <div id="app">
         {{ product }}
     </div>
@@ -59,12 +59,12 @@ https://www.vuemastery.com/courses/intro-to-vue-js/vue-instance
 
 * v-if:
 
-    ```
+    ```vue
     <p v-if="inventory > 10">In stock</p>
     <p v-else="inventory <= 10 && inventory > 0">Almost sold out</p>
     <p v-else>Out of stock</p>
     ```
-    ```
+    ```vuejs
     data: {
         inventory: 10
     }
@@ -80,13 +80,13 @@ https://www.vuemastery.com/courses/intro-to-vue-js/vue-instance
 
 * v-for: Expects: `Array` | `Object` | `number` | `string` | `Iterable` (since 2.6)
 
-    ```
+    ```vue
         <ul>
             <li v-for="detail in details">{{ detail }}</li>
         </ul> 
     ```
 
-    ``` 
+    ```vuejs
       data: {
         product: `Socks`,
         image: `./assets/vmSocks-blue-onWhite.jpg`,
@@ -97,13 +97,13 @@ https://www.vuemastery.com/courses/intro-to-vue-js/vue-instance
 
 * The default behavior of `v-for` will try to patch the elements in-place without moving them. To force it to reorder elements, you need to provide an ordering hint with the `key` special attribute:
 
-    ```
+    ```vue
         <div v-for="variant in variants" :key="variant.variantId">
             <p>{{ variant.variantColor }}</p>
         </div>
     ```
 
-    ```
+    ```vuejs
     variants: [
       {
         variantId: 2214,
@@ -123,7 +123,7 @@ https://www.vuemastery.com/courses/intro-to-vue-js/vue-instance
   * Expects: `Function` | `Inline Statement` | `Object`
 
 * Example : `click`
-```
+```vue
     <button v-on:click="addToCart">Add to cart</button>
 
     <div class="cart">
@@ -131,7 +131,7 @@ https://www.vuemastery.com/courses/intro-to-vue-js/vue-instance
     </div>
 ```
 
-```
+```vuejs
   methods: {
     addToCart: function() {
       this.cart += 1;
@@ -141,13 +141,13 @@ https://www.vuemastery.com/courses/intro-to-vue-js/vue-instance
 
 * Example: `mouseover`
 
-    ```
+    ```vue
     <div v-for="variant in variants" :key="variant.variantId">
         <p @mouseover="updateProduct(variant.variantImage)">{{ variant.variantColor }}</p>
     </div>
     ```
 
-    ```
+    ```vuejs
     variants: [
       {
         variantId: 2214,
@@ -171,10 +171,10 @@ https://www.vuemastery.com/courses/intro-to-vue-js/vue-instance
 
 * It is often a good idea to bind to a style object directly so that the template is cleaner:
 
-    ```
+    ```vue
     <div v-bind:style="styleObject"></div>
     ```
-    ```
+    ```vuejs
     data: {
       styleObject: {
         color: 'red',
@@ -202,11 +202,11 @@ https://www.vuemastery.com/courses/intro-to-vue-js/vue-instance
 ### Lesson 7: Computed properties
 
 * Computed properties are cached until its dependency is changed
-  ```
+  ```vue
   <h1>{{ title }}</h1>
   ```
 
-  ``` 
+  ```vuejs
     computed: {
       title() {
         return this.brand + ' ' + this.product;
@@ -216,7 +216,7 @@ https://www.vuemastery.com/courses/intro-to-vue-js/vue-instance
 
 * We update our code to make `inStock` and `image` computed properties. Now these properties depend on variant
 
-    ``` 
+    ```vue
     <div class="product-image">
         <img v-bind:src="image" v-bind:alt="product">
     </div>
@@ -233,7 +233,7 @@ https://www.vuemastery.com/courses/intro-to-vue-js/vue-instance
     </div>
     ```
 
-    ```
+    ```vuejs
     variants: [
       {
         variantId: 2214,
@@ -263,7 +263,7 @@ https://www.vuemastery.com/courses/intro-to-vue-js/vue-instance
 * Base example:
 
   * Define a new component called button-counter
-    ``` 
+    ```vue
     Vue.component('button-counter', {
       data: function () {
         return {
@@ -276,12 +276,12 @@ https://www.vuemastery.com/courses/intro-to-vue-js/vue-instance
 
   * Components are reusable Vue instances with a name: in this case, `<button-counter>`. We can use this component as a custom element inside a root Vue instance created with `new Vue`:
 
-    ```
+    ```vue
       <div id="components-demo">
         <button-counter></button-counter>
       </div>
     ```
-    ```
+    ```vuejs
       new Vue({ el: '#components-demo' })
     ```
 
@@ -289,7 +289,7 @@ https://www.vuemastery.com/courses/intro-to-vue-js/vue-instance
 
 * `data` option MUST be a function, so that each instance can maintain an independent copy of the returned data object:
 
-    ```
+    ```vuejs
     data: function () {
       return {
         count: 0
@@ -300,14 +300,14 @@ https://www.vuemastery.com/courses/intro-to-vue-js/vue-instance
 * `props` 
   * We pass data to child components using `props`!
   
-  ```
+  ```vuejs
   Vue.component('blog-post', {
     props: ['title'],
     template: '<h3>{{ title }}</h3>'
   })
   ```
   
-  ```
+  ```vue
   <blog-post title="My journey with Vue"></blog-post>
   <blog-post title="Blogging with Vue"></blog-post>
   <blog-post title="Why Vue is so fun"></blog-post>
@@ -320,7 +320,7 @@ https://www.vuemastery.com/courses/intro-to-vue-js/vue-instance
 * Checkout commit `Lesson 9` for more details.
 
   * Child: We emit method name and variantId
-    ```
+    ```vuejs
     methods: {
         addToCart: function() {
           this.$emit('add-to-cart', this.variants[this.selectedVariant].variantId);
@@ -328,11 +328,11 @@ https://www.vuemastery.com/courses/intro-to-vue-js/vue-instance
       },
     ```
   * Parent component: 
-    ```
+    ```vue
     <product @add-to-cart="updateCart"></product>
     ```
     
-    ``` 
+    ```vuejs
     methods: {
         updateCart(id) {
           this.cart.push(id);
@@ -356,11 +356,11 @@ https://www.vuemastery.com/courses/intro-to-vue-js/vue-instance
 
 * Example:
   * `@submit.prevent="onSubmit"` use `.prevent` to prevent form submission
-    ```
+    ```vue
     <product-review></product-review>
     ```
     
-    ```
+    ```vuejs
     Vue.component('product-review', {
       template: `
       <form @submit.prevent="onSubmit">
@@ -401,7 +401,7 @@ https://www.vuemastery.com/courses/intro-to-vue-js/vue-instance
   * `vm.$on` ( `event`, `callback` )
     * Listen for a custom event on the current vm. Events can be triggered by vm.$emit. The callback will receive all the additional arguments passed into these event-triggering methods
     
-        ```
+        ```vuejs
         vm.$on('test', function (msg) {
           console.log(msg)
         })

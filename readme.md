@@ -360,7 +360,7 @@ https://www.vuemastery.com/courses/intro-to-vue-js/vue-instance
     <product-review></product-review>
     ```
     
-    ```vuejs
+    ```javascript
     Vue.component('product-review', {
       template: `
       <form @submit.prevent="onSubmit">
@@ -593,7 +593,7 @@ https://www.vuemastery.com/courses/real-world-vue-js/real-world-intro/
     ```
 
 
-### Lesson 5: Dynamic Routing & History Mode
+#### Lesson 5: Dynamic Routing & History Mode
 
 
 * Create dynamic route.
@@ -649,3 +649,31 @@ https://www.vuemastery.com/courses/real-world-vue-js/real-world-intro/
 
   * Here comes a problem, though: Since our app is a single page client side app, without a proper server configuration, the users will get a 404 error if they access `http://oursite.com/user/id` directly in their browser. 
   [Read more about server config](https://router.vuejs.org/guide/essentials/history-mode.html)
+
+
+#### Lesson 6: Single File Vue Component
+
+* Component file structure:
+
+    ```vue
+    <template>
+        <div>
+         .....
+        </div>
+    </template>
+    
+    <script>
+    export default {
+      
+    }
+    </script>
+    
+    
+    <style scoped>
+    
+    </style>
+    ```
+    
+    * `scoped` scope the style to this component
+
+

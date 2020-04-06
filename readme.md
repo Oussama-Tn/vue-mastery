@@ -408,3 +408,97 @@ https://www.vuemastery.com/courses/intro-to-vue-js/vue-instance
         vm.$emit('test', 'hi')
         // => "hi"
         ```
+
+
+### 2 - Real World Vue.js
+
+#### Lesson 1: Intro
+
+https://www.vuemastery.com/courses/real-world-vue-js/real-world-intro/
+
+#### Lesson 2: Vue CLI 3 - Creating our Project
+
+* Vue CLI: Command Line Interface
+  * Allows us to select libraries our project will be using
+    * Automatically plug them into our project
+  * It configures webpack. 
+    * JS files, CSS, and dependencies get properly bundled together and optimized upon deployment
+  * Allows us to write our HTML, CSS & JAvascript however we like.
+    * We can use single-file .vue components, TypeScript, SCSS, Pug, the latest versions of EXMAScript, etc.
+  * In development mode, it enables Hot Module Replacement (HMR)
+    * Your app updates live whenever you save a change.
+
+* We install VueCLI using `npm`
+
+  ```bash
+  npm i -g @vue/cli
+  ```
+
+  * We can create our project with VueCLI or VueUI
+  
+* Create a project using the command line
+
+  ```bash
+  vue create 2-real-world-vue
+  ```
+  Select: 
+  * Babel
+  * Router 
+  * Vuex
+  * Linter / Formatter 
+    * (EsLint + Prettier)
+    * Lint on save
+  * Place config in dedicated config files
+  * Use npm
+
+* Run the project  
+  ```bash
+  npm run serve
+  ```
+
+* _Check video to see how to create a project using VueUI_
+
+ * Run VueUI using this command: 
+    ```bash
+    vue ui
+    ```
+
+* How is the app being loaded?
+    
+    ```javascript
+    import Vue from "vue";
+    import App from "./App.vue";
+    import router from "./router";
+    import store from "./store";
+    
+    Vue.config.productionTip = false;
+    
+    new Vue({
+      router,
+      store,
+      render: h => h(App)
+    }).$mount("#app");
+    
+    ```
+  * `App.vue` : is the root component
+  * `router` : vue router
+  * `store` : for vuex
+  * ```javascript
+    // Create our Vue instance
+    new Vue({
+      // Send our router and store to the Vue instance
+      router,
+      store,
+      // render the App component
+      render: h => h(App)
+      // mount our App to #app
+    }).$mount("#app");
+    ```
+  * When our App gets loaded it starts by serving up the `public` directory and loading `index.html`
+
+* Build process
+  * Build our app for production
+  ```bash
+  npm run build
+  ```
+  * a new directory `/dist` is created. It contains our `js` & `css` files

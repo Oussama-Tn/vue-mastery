@@ -1,5 +1,5 @@
 <template>
-    <router-link class="event-link" :to="{ name: 'event-show', params: { id: '1' }}">
+    <router-link class="event-link" :to="{ name: 'event-show', params: { id: event.id }}">
         <div class="event-card -shadow">
             <span class="eyebrow">@{{ event.time }} on {{ event.date }}</span>
             <h4 class="title">{{ event.title }}</h4>
@@ -13,21 +13,10 @@
 <script>
   import BaseIcon from "./BaseIcon";
   export default {
+    props: {
+      event: Object
+    },
     components: {BaseIcon},
-    data() {
-      return {
-        event: {
-          id: 1,
-          title: 'Beach Cleanup',
-          date: 'Tues Aug 19, 2018',
-          time: '6:00',
-          attendees: [
-            {id: 'abc123', name: 'Oussama GHAIEB'},
-            {id: 'abc456', name: 'Adam GHAIEB'}
-          ]
-        }
-      }
-    }
   }
 </script>
 

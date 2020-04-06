@@ -784,3 +784,100 @@ https://www.vuemastery.com/courses/real-world-vue-js/real-world-intro/
         </MediaBox>
     </template>
     ```
+
+
+#### Lesson 9: API calls with Axios
+
+* We need a library to do API calls [AXIOS](https://github.com/axios/axios)
+
+* [Axios](https://github.com/axios/axios):
+  * `GET`, `POST`, `PUT` and `DELETE` requests 
+  * Add authentication to each request
+  * Set timeouts if request take too long
+  * Configure defaults for every request
+  * Intercept requests to create middleware
+  * Handle errors and cancel requests properly
+  * Properly serialize and deserialize requests and responses
+  
+* Axios call are run asynchronously
+  * The code doesn't wait to be completed , before continuing
+    ```javascript
+    apiCall() {
+      console.log('Enter');
+      
+      axios.get('https://example.com/events')
+        .then(response => console.log(response.data))
+        .catch(error => console.log(error));
+      
+      console.log('Exit');
+    }
+    ```
+    * Result:
+    ```
+    //result
+    > apiCall()
+    Enter
+    Exit
+    {
+      "events": [...]
+    }
+    ```
+
+* We'll need get a full fake REST API using [json-server](https://github.com/typicode/json-server)
+
+    ```bash
+    npm install -g json-server
+    ```
+
+   * We'll use `db.json` to mock api data
+    ```bash
+    json-server --watch db.json
+    ```
+    Now go to: `http://localhost:3000/events`
+
+* [2-real-world-vue/src/services/EventService.js](2-real-world-vue/src/services/EventService.js)
+
+    ```javascript
+    import axios from 'axios';
+    
+    const apiClient = axios.create({
+      baseURL: 'http://localhost:3000',
+      withCredentials: false,
+      headers: {
+        Accept: 'application/json',
+        'content-type': 'application/json'
+      }
+    });
+    
+    export default {
+      getEvents() {
+        return apiClient.get('/events');
+      },
+      getEvent(id) {
+        return apiClient.get('/events/' + id);
+      }
+    }
+    ```
+
+    ```javascript
+      import EventCard from '@/components/EventCard.vue';
+      import EventService from '@/services/EventService.js';
+    
+      export default {
+        components: {
+          EventCard
+        },
+        data() {
+          return {
+            events: []
+          }
+        },
+        created() {
+          EventService.getEvents()
+              .then(response => {
+                this.events = response.data
+              })
+              .catch(error => console.log(error))
+        }
+      }
+    ```

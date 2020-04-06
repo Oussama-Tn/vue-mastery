@@ -743,3 +743,44 @@ https://www.vuemastery.com/courses/real-world-vue-js/real-world-intro/
       )
     })
     ```
+
+
+#### Lesson 8: Slots
+
+
+* Example of slot:
+
+    ```vue
+    <template>
+        <div class="icon-wrapper">
+            <svg class="icon" :width="width" :height="height">
+                <use v-bind="{ 'xlink:href': 'feather-sprite.svg#'+name}"></use>
+            </svg>
+            <slot></slot>
+        </div>
+    </template>
+    ```
+    
+    ```vue
+    <BaseIcon name="users">
+        {{ event.attendees.length }} attendees
+    </BaseIcon>
+    ```
+
+* Name slot:
+
+  * MediaBox.vue:
+    ```vue
+    <slot name="heading"></slot>
+    <slot name="paragraph"></slot>
+
+    ```
+  * Parent.vue
+    ```vue
+    <template>
+        <MediaBox>
+            <h2 slot="heading">Oussama GHAIEB</h2>
+            <p slot="paragraph">My words...</p>    
+        </MediaBox>
+    </template>
+    ```

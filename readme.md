@@ -591,3 +591,61 @@ https://www.vuemastery.com/courses/real-world-vue-js/real-world-intro/
         alias: "/about"
       }
     ```
+
+
+### Lesson 5: Dynamic Routing & History Mode
+
+
+* Create dynamic route.
+
+    * [2-real-world-vue/src/router/index.js](2-real-world-vue/src/router/index.js)
+    ```javascript
+      {
+        path: "/user/:username",
+        name: "User",
+        component: User,
+        props: true
+      },
+    ```
+
+    * Create Link
+    ```vue
+    <template>
+      <div id="app">
+        <div id="nav">
+          <router-link :to="{ name: 'Home' }">Home</router-link> |
+          <router-link :to="{ name: 'User', params: { username : 'Oussama' } }">Oussama</router-link>
+        </div>
+        <router-view />
+      </div>
+    </template>
+    ```
+
+    * [2-real-world-vue/src/views/User.vue](2-real-world-vue/src/views/User.vue)
+    ```vue
+    <template>
+      <div class="about">
+        <h1>This is {{ $route.params.username }} page</h1>
+      </div>
+    </template>
+    
+    <script>
+      export default {
+        props: ["username"]
+      };
+    </script>
+    ```
+  * Using `props: ["username"]`, our component can now be more easily reused as child component somewhere sending in `username` as a `prop`
+
+* The hash `#` is removed from the URL by adding `mode: "history",` to our [2-real-world-vue/src/router/index.js](2-real-world-vue/src/router/index.js)
+    
+    ```javascript
+    const router = new VueRouter({
+      mode: "history",
+      base: process.env.BASE_URL,
+      routes
+    });
+    ```
+
+  * Here comes a problem, though: Since our app is a single page client side app, without a proper server configuration, the users will get a 404 error if they access `http://oursite.com/user/id` directly in their browser. 
+  [Read more about server config](https://router.vuejs.org/guide/essentials/history-mode.html)

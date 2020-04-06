@@ -3,13 +3,16 @@
         <div class="event-card -shadow">
             <span class="eyebrow">@{{ event.time }} on {{ event.date }}</span>
             <h4 class="title">{{ event.title }}</h4>
+            <BaseIcon name="users" />
             <span>{{ event.attendees.length }} attendees</span>
         </div>
     </router-link>
 </template>
 
 <script>
+  import BaseIcon from "./BaseIcon";
   export default {
+    components: {BaseIcon},
     data() {
       return {
         event: {

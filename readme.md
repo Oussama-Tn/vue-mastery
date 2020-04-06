@@ -502,3 +502,92 @@ https://www.vuemastery.com/courses/real-world-vue-js/real-world-intro/
   npm run build
   ```
   * a new directory `/dist` is created. It contains our `js` & `css` files
+
+#### Lesson 3: Optimizing your Editor
+
+* Check video course
+
+#### Lesson 4: Vue Router Basics
+
+* Vuejs uses `vue-router` for client side routing.
+* As you can see in `package.json`, we have `vue-router` as a dependecy
+
+    ```json
+      "dependencies": {
+        "core-js": "^3.6.4",
+        "vue": "^2.6.11",
+        "vue-router": "^3.1.6",
+        "vuex": "^3.1.3"
+      },
+    ```
+
+* [2-real-world-vue/src/router/index.js](2-real-world-vue/src/router/index.js)
+
+  ```
+    import Home from "../views/Home.vue";
+    //...
+    {
+      path: "/",
+      name: "home",
+      component: Home
+    },
+  ```
+
+* We use the router inside our [2-real-world-vue/src/main.js](2-real-world-vue/src/main.js)
+
+    ```javascript
+    import router from "./router";
+    new Vue({
+      router,
+      // ....
+    ```
+    * With ES6, this is the same as:
+    
+    ```javascript
+    import router from "./router";
+    new Vue({
+      router: router,
+      // ....
+    ```
+* `<router-link />` is a component that looks for path inside our router.
+  * `<router-view />` is where our vue is rendered
+
+
+    ```vue
+      <div id="app">
+        <div id="nav">
+          <router-link to="/">Home</router-link> |
+          <router-link to="/about">About</router-link>
+        </div>
+        <router-view />
+      </div>
+    ```
+
+* Use named routes:
+
+    ```vue
+    <router-link :to="{name: 'home'}">Home</router-link>
+    ```
+    
+* Redirect url:
+  * 1st way:
+    ```javascript
+        {
+          path: "/about-us",
+          name: "about",
+          component: About
+        },
+        {
+          path: "/about",
+          redirect: { name: "about"}
+        },
+    ```
+  * 2nd way:
+    ```javascript
+      {
+        path: "/about-us",
+        name: "about",
+        component: About,
+        alias: "/about"
+      }
+    ```

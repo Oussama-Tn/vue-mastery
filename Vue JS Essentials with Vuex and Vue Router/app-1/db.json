@@ -1,0 +1,51 @@
+{
+  "videos": {
+    "items": [
+        {
+          "snippet": {
+            "etag": "1114684",
+            "title": "This is a men's world",
+            "description": "Description ... This is a men's world",
+            "thumbnails": {
+              "default": {
+                "url": "https://picsum.photos/180/100"
+              }
+            }
+          },
+          "id": {
+            "videoId": "OrxmtDw4pVI"
+          }
+        },
+        {
+          "snippet": {
+            "etag": "213154684",
+            "title": "It's a beautiful world",
+            "description": "Description ... Lorem ipsum dolor sir amet",
+            "thumbnails": {
+              "default": {
+                "url": "https://picsum.photos/180/99"
+              }
+            }
+          },
+          "id": {
+            "videoId": "xDhzYQ4VyCw"
+          }
+        },
+        {
+          "snippet": {
+            "etag": "55554684",
+            "title": "Lorem ipsum dolor sit amet",
+            "description": "Description ...Lorem ipsum dolor sit amet.. Lorem ipsum dolor sir amet",
+            "thumbnails": {
+              "default": {
+                "url": "https://picsum.photos/180/98"
+              }
+            }
+          },
+          "id": {
+            "videoId": "Wy9q22isx3U"
+          }
+        }
+    ]
+  }
+}

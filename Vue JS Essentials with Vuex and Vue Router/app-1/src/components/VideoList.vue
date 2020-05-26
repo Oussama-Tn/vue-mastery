@@ -1,7 +1,6 @@
 <template>
-  <div>
-    <h2>Video List</h2>
-    <ul v-if="videos" class="list-group">
+  <div
+    <ul v-if="videos" class="list-group col-md-4">
       <VideoListItem
       v-for="video in videos"
       :key="video.etag"

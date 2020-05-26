@@ -141,5 +141,3 @@
   ```javascript
   const { videoId } = this.video.id;
   return `https://www.youtube.com/embed/${videoId}`;
-
-  * Lesson 76: pending ....

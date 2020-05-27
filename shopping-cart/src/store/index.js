@@ -5,16 +5,16 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: { // = data in Vue Instance
-
+    products: []
   },
-  getters {  // = computed properties in Vue Instance
+  getters: {  // = computed properties in Vue Instance
     productsCount() {
       // ...
     }
   },
   mutations: {
-    setProducts() {
-      // ...
+    setProducts(state, products) {
+      state.products = products;
     }
   },
   actions: {

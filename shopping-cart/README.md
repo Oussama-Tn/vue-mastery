@@ -137,9 +137,19 @@
   },
   ```
   * Read more about `actions` ([here](https://vuex.vuejs.org/guide/actions.html))
-  > Action handlers receive a `context` object which exposes the same set of methods/properties on the store instance, so you can call `context.commit` to commit a mutation, or access the state and getters via `context.state` and `context.getters`. We can even call other actions with `context.dispatch`.
+    > Action handlers receive a `context` object which exposes the same set of methods/properties on the store instance, so you can call `context.commit` to commit a mutation, or access the state and getters via `context.state` and `context.getters`. We can even call other actions with `context.dispatch`.
+
     * `console.log(context);` to get more information
 
+  * We can use ES6 argument destructuring to transform our action to this:
+  ```javascript
+  fetchProducts({commit}) {
+    // make api call
+    shop.getProducts(products => {
+      commit('setProducts', products);
+    });
+  }
+  ```
 
 ## Project setup
 ```

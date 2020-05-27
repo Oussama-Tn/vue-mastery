@@ -19,12 +19,11 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    fetchProducts(context) {
+    fetchProducts({commit}) {
       // make api call
       shop.getProducts(products => {
-        context.commit('setProducts', products);
+        commit('setProducts', products);
       });
-      // run setProducts mutation
     }
 
   },

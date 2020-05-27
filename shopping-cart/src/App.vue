@@ -10,9 +10,6 @@
     name: "App",
     components: {
       ProductList
-    },
-    data() {
-
     }
   }
 </script>

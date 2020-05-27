@@ -24,6 +24,7 @@
     }
   },
   ```
+
   * Fetch data and update the state in the store via mutation
   ```javascript
 
@@ -44,6 +45,29 @@
   }
   ```
 
+  * Example of using getters: Get available products
+  ```javascript
+  // Changed this
+  computed: {
+    products() {
+      return store.state.products;
+    }
+  }
+
+  // To this:
+  computed: {
+    products() {
+      return store.getters.availableProducts;
+    }
+  },
+
+  // Inside our store:
+  getters: {  // = computed properties in Vue Instance
+    availableProducts(state) {
+      return state.products.filter(product => product.inventory > 0)
+    }
+  },
+  ```
 
 
 

@@ -3,44 +3,7 @@
 * Course: https://vueschool.io/courses/vuex-for-everyone
 * Source code: https://github.com/vueschool/learn-vuex
 
-
-* **Before we start**:
-  * The **destructuring assignment** syntax is a JavaScript expression that makes it possible to unpack values from arrays, or properties from objects, into distinct variables. ([Read more](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#Object_destructuring))
-    ```javascript
-    let a, b, rest;
-    [a, b] = [10, 20];
-    console.log(a); // 10
-    console.log(b); // 20
-
-    [a, b, ...rest] = [10, 20, 30, 40, 50];
-    console.log(a); // 10
-    console.log(b); // 20
-    console.log(rest); // [30, 40, 50]
-
-    ({ a, b } = { a: 10, b: 20 });
-    console.log(a); // 10
-    console.log(b); // 20
-
-
-    // Stage 4(finished) proposal
-    ({a, b, ...rest} = {a: 10, b: 20, c: 30, d: 40});
-    console.log(a); // 10
-    console.log(b); // 20
-    console.log(rest); // {c: 30, d: 40}
-
-    // Object destructuring
-    const user = {
-        id: 42,
-        is_verified: true
-    };
-
-    const {id, is_verified} = user;
-
-    console.log(id); // 42
-    console.log(is_verified); // true
-    ```
-
-
+* Before you start, you may read more about JS [here](./READMEJS.md)
 
 * **Store** compared to **Vue Instance**
   * `state` in **Store** is similar to `data` in **Vue Instance**

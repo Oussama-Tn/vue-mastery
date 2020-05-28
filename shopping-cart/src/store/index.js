@@ -21,9 +21,15 @@ export default new Vuex.Store({
   actions: {
     fetchProducts({commit}) {
       // make api call
-      shop.getProducts(products => {
-        commit('setProducts', products);
+      /* eslint-disable */
+      return new Promise((resolve, reject) => {
+        shop.getProducts(products => {
+          commit('setProducts', products);
+          resolve();
+        })
       });
+      /* eslint-enable */
+
     }
 
   },

@@ -222,6 +222,18 @@
   }
   ```
 
+* Create and use filters:
+  * Create filter: `src/filters/currency.js`
+  * Using filters:
+  ```javascript
+  // in main.js
+  import currency from '@/filters/currency';
+  Vue.filters('currency', currency);
+
+  // Use filter in components
+  {{ total | currency}}
+  ```
+
 
 ## Project setup
 ```

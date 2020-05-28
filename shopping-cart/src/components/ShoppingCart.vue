@@ -6,7 +6,7 @@
       <li>{{ product.title }} - {{ product.price }} - {{ product.quantity }}</li>
     </ul>
     <p>
-      Total: {{ total }}
+      Total: {{ total | currency }}
     </p>
   </div>
 </template>

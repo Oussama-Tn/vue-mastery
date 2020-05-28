@@ -187,6 +187,41 @@
   },
   ```
 
+* Cart products:
+  ```javascript
+  // store/index.js : getters {}
+  cartProducts (state) {
+    return state.cart.map(cartItem => {
+
+      const product = state.products.find(product => product.id === cartItem.id);
+
+      return {
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        quantity: cartItem.quantity
+      }
+    });
+  },
+  ```
+* Cart Toral:
+  ```javascript
+
+  // store/index.js : getters {}
+  cartTotal (state, getters) {
+    let total = 0;
+    getters.cartProducts.forEach(product => {
+      total += product.price * product.quantity;
+    });
+    return total
+  }
+
+  // A better way using reduce()
+  cartTotal (state, getters) {
+    return getters.cartProducts.reduce((total, product) => total + product.price * product.quantity, 0);
+  }
+  ```
+
 
 ## Project setup
 ```

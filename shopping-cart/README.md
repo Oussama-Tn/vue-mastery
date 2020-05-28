@@ -136,6 +136,58 @@
   }).$mount("#app");
   ```
 
+* Create action **addProductToCart**
+  ```javascript
+  // store/index.js
+  state: { // = data in Vue Instance
+    products: [],
+    cart: []
+  },
+  actions: {
+    addProductToCart(context, product) {
+      if (product.inventory > 0) {
+        const cartItem = context.state.cart.find(item => item.id === product.id);
+
+        if (!cartItem) {
+          context.commit('pushProductToCart', product.id);
+        } else {
+          context.commit('incrementCartItemQuantity', cartItem);
+        }
+
+        context.commit('decrementProductInventory', product);
+      }
+    },
+  mutations: {
+    pushProductToCart(state, productId) {
+      state.cart.push({
+        id: productId,
+        quantity: 1
+      });
+    },
+    incrementCartItemQuantity(state, cartItem) {
+      cartItem.quantity ++;
+    },
+    decrementProductInventory(state, product) {
+      product.inventory --;
+    }
+  }
+  // ProductList.vue
+
+  `
+  <li v-for="product in products" :key="product.id">
+    {{ product.title }} - {{ product.price }}
+    <button @click="addProductToCart(product)"> Add to cart</button>
+  </li>
+  `
+
+  methods: {
+    addProductToCart(product) {
+      this.$store.dispatch('addProductToCart', product);
+    }
+  },
+  ```
+
+
 ## Project setup
 ```
 npm install

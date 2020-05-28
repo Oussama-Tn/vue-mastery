@@ -114,6 +114,28 @@
   }
   ```
 
+* Store Access from all components
+  * Remove the `import` statement from `ProductList` and add the `store` to the Vue instance in `main.js`
+  ```javascript
+  // ProductList
+  // remove: import store from './store';
+
+  // replace "store" with "this.$store"
+
+  this.$store.getters.availableProducts;
+
+  this.$store.dispatch('fetchProducts').then(() => this.loading = false);
+
+  // main.js
+  import store from "./store";
+
+  new Vue({
+    router,
+    store, // add store
+    render: h => h(App)
+  }).$mount("#app");
+  ```
+
 ## Project setup
 ```
 npm install

@@ -234,6 +234,77 @@
   {{ total | currency}}
   ```
 
+* **Getters**: Method-Style Access
+  *You can also pass arguments to getters by returning a function. This is particularly useful when you want to query an array in the store:
+
+    ```javascript
+    getters: {
+      // ...
+      getTodoById: (state) => (id) => {
+        return state.todos.find(todo => todo.id === id)
+      }
+    }
+    ```
+    ```javascript
+    store.getters.getTodoById(2) // -> { id: 2, text: '...', done: false }
+    ```
+      * Note that getters accessed via methods will run each time you call them, and the result is not cached.
+
+    * Method-Style Access
+    ```javascript
+    // store/index.vue
+    getters: {
+      productIsInStock() {
+        // Here we could also pass the product.id as an argument and grab the product from the state
+        return (product) => product.inventory > 0;
+      }
+    },
+
+    // @/components/ProductList.vue
+    `
+    <li v-for="product in products" :key="product.id">
+      {{ product.title }} - {{ product.price | currency }} [{{ product.inventory }}]
+      <button @click="addProductToCart(product)"
+        :disabled="!productIsInStock(product)"
+      > Add to cart</button>
+    </li>
+    `
+    computed: {
+      //...
+      productIsInStock() {
+        return this.$store.getters.productIsInStock;
+      }
+    },
+    ```
+
+* **Getters** The mapGetters Helper
+  * The `mapGetters` helper simply maps store getters to local computed properties:
+    ```javascript
+    import { mapGetters } from 'vuex'
+
+    export default {
+      // ...
+      computed: {
+        // mix the getters into computed with object spread operator
+        ...mapGetters([
+          'doneTodosCount',
+          'anotherGetter',
+          // ...
+        ])
+      }
+    }
+    ```
+      * If you want to map a getter to a different name, use an object:
+      ```javascript
+      ...mapGetters({
+        // map `this.doneCount` to `this.$store.getters.doneTodosCount`
+        doneCount: 'doneTodosCount'
+      })
+      ```
+
+
+
+
 
 ## Project setup
 ```

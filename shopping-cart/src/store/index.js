@@ -36,6 +36,11 @@ export default new Vuex.Store({
       // return total;
 
       return getters.cartProducts.reduce((total, product) => total + product.price * product.quantity, 0)
+    },
+
+    productIsInStock() {
+      // Here we could also pass the product.id as an argument and grab the product from the state
+      return (product) => product.inventory > 0;
     }
   },
   mutations: {
@@ -73,17 +78,17 @@ export default new Vuex.Store({
       });
       /* eslint-enable */
     },
-    addProductToCart(context, product) {
-      if (product.inventory > 0) {
-        const cartItem = context.state.cart.find(item => item.id === product.id);
+    addProductToCart({getters, commit, state}, product) {
+      if (getters.productIsInStock(product)) {
+        const cartItem = state.cart.find(item => item.id === product.id);
 
         if (!cartItem) {
-          context.commit('pushProductToCart', product.id);
+          commit('pushProductToCart', product.id);
         } else {
-          context.commit('incrementCartItemQuantity', cartItem);
+          commit('incrementCartItemQuantity', cartItem);
         }
 
-        context.commit('decrementProductInventory', product);
+        commit('decrementProductInventory', product);
       }
     },
     checkout({state, commit}) {

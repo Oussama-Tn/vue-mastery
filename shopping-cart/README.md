@@ -277,7 +277,7 @@
     },
     ```
 
-* **Getters** The mapGetters Helper
+* **Getters** The `mapGetters` Helper
   * The `mapGetters` helper simply maps store getters to local computed properties:
     ```javascript
     import { mapGetters } from 'vuex'
@@ -303,7 +303,65 @@
       ```
 
 
+* **State**: The `mapState` Helper
+  * When a component needs to make use of multiple store state properties or getters, declaring all these computed properties can get repetitive and verbose. => Use `mapState` Helper !
+    ```javascript
+    // in full builds helpers are exposed as Vuex.mapState
+    import { mapState } from 'vuex'
 
+    export default {
+      // ...
+      computed: mapState({
+        // arrow functions can make the code very succinct!
+        count: state => state.count,
+
+        // passing the string value 'count' is same as `state => state.count`
+        countAlias: 'count',
+
+        // to access local state with `this`, a normal function must be used
+        countPlusLocalState (state) {
+          return state.count + this.localCount
+        }
+      })
+    }
+    ```
+     * We can also pass a string array to `mapState` when the name of a mapped computed property is the same as a state sub tree name.
+      ```javascript
+      computed: mapState([
+        // map this.count to store.state.count
+        'count'
+      ])
+      ```
+    * Note that `mapState` returns an object. You can use it in combination with other computed properties like follow (using the spread operator `...`):
+      ```javascript
+      computed: {
+        localComputed () { /* ... */ },
+        // mix this into the outer object with the object spread operator
+        ...mapState({
+          // ...
+        })
+      }
+      ```
+
+* **Actions**: The `mapActions` Helper: read more [here](https://vuex.vuejs.org/guide/actions.html)
+  ```javascript
+  import { mapActions } from 'vuex'
+
+  export default {
+    // ...
+    methods: {
+      ...mapActions([
+        'increment', // map `this.increment()` to `this.$store.dispatch('increment')`
+
+        // `mapActions` also supports payloads:
+        'incrementBy' // map `this.incrementBy(amount)` to `this.$store.dispatch('incrementBy', amount)`
+      ]),
+      ...mapActions({
+        add: 'increment' // map `this.add()` to `this.$store.dispatch('increment')`
+      })
+    }
+  }
+  ```
 
 
 ## Project setup

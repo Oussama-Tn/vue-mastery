@@ -5,6 +5,41 @@
 
 * Before you start, you may read more about JS [here](./READMEJS.md)
 
+* Note: [**Vuex**](https://vuex.vuejs.org/) is a **state management pattern + library** for Vue.js applications. It serves as a **centralized store for all the components** in an application, with rules ensuring that the state can only be mutated in a predictable fashion.
+
+  ```javascript
+  // Vuejs
+  const app = new Vue({
+    data: {
+      //...
+    },
+    methods: {
+      //...
+    },
+    computed: {
+      //...
+    }
+  })
+
+  // Vuex
+  const app = new Vuex.Store({
+    state: {
+      // .. data in Vue
+    },
+    mutations: {
+      // ...called by actions. Role: Commit + track state changes
+    },
+    actions: {
+      // .. methods in Vue
+    },
+    getters: {
+      // .. computed in Vue
+    }
+  })
+
+  ```
+
+
 * **Store** compared to **Vue Instance**
   * `state` in **Store** is similar to `data` in **Vue Instance**
   * `getters` in **Store** are similar to `computed properties` in **Vue Instance**

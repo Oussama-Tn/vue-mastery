@@ -397,6 +397,18 @@ https://vueschool.io/courses/vue-router-for-everyone
 
 * Named routes are highly recommended as they allow us to do changes to the URL without the need for refactoring the links in our apps.
 
+* In our `/routes/index.js`
+  ```javascript
+  {
+    path: "/details",
+    name: "DestinationDetails",
+    component: () =>
+      import(
+        /* webpackChunkName: "destinationDetails" */ "../views/DestinationDetails.vue"
+      )
+  }
+  ```
+
 * Destinations links:
   ```javascript
   <router-link :to="{ name: 'DestinationDetails', params: {id:destination.id}}">

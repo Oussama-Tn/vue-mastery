@@ -22,33 +22,39 @@ const routes = [
   {
     path: "/brazil",
     name: "brazil",
-    component: () => import(/* webpackChunkName: "brazil" */ "../views/Brazil.vue")
+    component: () =>
+      import(/* webpackChunkName: "brazil" */ "../views/Brazil.vue")
   },
   {
     path: "/hawaii",
     name: "hawaii",
-    component: () => import(/* webpackChunkName: "hawaii" */ "../views/Hawaii.vue")
+    component: () =>
+      import(/* webpackChunkName: "hawaii" */ "../views/Hawaii.vue")
   },
   {
     path: "/jamaica",
     name: "jamaica",
-    component: () => import(/* webpackChunkName: "jamaica" */ "../views/Jamaica.vue")
+    component: () =>
+      import(/* webpackChunkName: "jamaica" */ "../views/Jamaica.vue")
   },
   {
     path: "/panama",
     name: "panama",
-    component: () => import(/* webpackChunkName: "panama" */ "../views/Panama.vue")
+    component: () =>
+      import(/* webpackChunkName: "panama" */ "../views/Panama.vue")
   },
   {
     path: "/details",
     name: "DestinationDetails",
     component: () =>
-      import(/* webpackChunkName: "destinationDetails" */ "../views/DestinationDetails.vue")
+      import(
+        /* webpackChunkName: "destinationDetails" */ "../views/DestinationDetails.vue"
+      )
   }
 ];
 
 const router = new VueRouter({
-  linkExactActiveClass: 'my-custom-exact-active-class',
+  linkExactActiveClass: "my-custom-exact-active-class",
   routes
 });
 

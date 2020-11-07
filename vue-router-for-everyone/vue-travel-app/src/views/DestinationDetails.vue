@@ -1,12 +1,47 @@
 <template>
   <div>
-    <h2>Destination id: {{ this.$route.params.id }}</h2>
+    <section class="destination">
+      <h1>{{ destination.name }}</h1>
+      <div class="destination-details">
+        <img :src="require(`@/assets/${destination.image}`)"
+        :alt="destination.name" />
+      </div>
+    </section>
   </div>
 </template>
 <script>
+import store from "@/store.js"
+
 export default {
   name: "DestinationDetails",
-  data: () => ({})
+  data() {
+    return {
+      destinationId: this.$route.params.id
+    }
+  },
+  computed: {
+    destination() {
+      return store.destinations.find(
+        destination => destination.id == this.destinationId
+      )
+    }
+  }
 };
 </script>
-<style lang="scss" scoped></style>
+<style scoped>
+image {
+  max-width: 600px;
+  height: auto;
+  width: 100%;
+  max-height: 400px;
+}
+.destination-details {
+  display: flex;
+  justify-content: space-between;
+}
+p {
+  margin: 0 40px;
+  font-size: 20px;
+  text-align: left;
+}
+</style>

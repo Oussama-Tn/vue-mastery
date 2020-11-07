@@ -423,3 +423,51 @@ https://vueschool.io/courses/vue-router-for-everyone
     </div>
   </template>
   ```
+
+## Dynamic Routes
+
+* Add `/:id` in our `/routes/index.js`
+  ```javascript
+  {
+    path: "/details/:id",
+    name: "DestinationDetails",
+    component: () =>
+      import(
+        /* webpackChunkName: "destinationDetails" */ "../views/DestinationDetails.vue"
+      )
+  }
+  ```
+
+* In Details page `/src/views/DestinationDetails.vue`: We retrieve the `id` value from the `$route`
+  ```html
+  <template>
+    <div>
+      <section class="destination">
+        <h1>{{ destination.name }}</h1>
+        <div class="destination-details">
+          <img :src="require(`@/assets/${destination.image}`)"
+          :alt="destination.name" />
+        </div>
+      </section>
+    </div>
+  </template>
+  <script>
+  import store from "@/store.js"
+
+  export default {
+    name: "DestinationDetails",
+    data() {
+      return {
+        destinationId: this.$route.params.id
+      }
+    },
+    computed: {
+      destination() {
+        return store.destinations.find(
+          destination => destination.id == this.destinationId
+        )
+      }
+    }
+  };
+  </script>
+  ```

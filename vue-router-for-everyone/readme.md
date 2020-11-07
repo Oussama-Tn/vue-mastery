@@ -320,3 +320,75 @@ https://vueschool.io/courses/vue-router-for-everyone
       }
     ];
     ```
+## TheNavigation component
+
+* It's recommended to name component using "the" keyword, example: TheNavigation
+
+* `/src/components/TheNavigation.vue`
+  ```html
+  <template>
+    <div id="nav">
+      <router-link to="/">Home</router-link>
+      <router-link to="/brazil">Brazil</router-link>
+      <router-link to="/hawaii">Hawaii</router-link>
+      <router-link to="/jamaica">Jamaica</router-link>
+      <router-link to="/panama">Panma</router-link>
+    </div>
+  </template>
+
+  <style scoped>
+  #nav {
+    display: flex;
+    align-items: center;
+    padding: 30px;
+  }
+
+  #nav a {
+    font-weight: bold;
+    color: #2c3e50;
+    padding: 0 10px;
+  }
+
+  #nav a.router-link-exact-active {
+    color: #42b983;
+  }
+  </style>
+  ```
+
+* `/src/App.vue`
+  ```html
+  <template>
+    <div id="app">
+      <TheNavigation />
+      <router-view />
+    </div>
+  </template>
+  <script type="text/javascript">
+    import TheNavigation from '@/components/TheNavigation'
+
+    export default {
+      components: {
+        TheNavigation
+      }
+    }
+  </script>
+  ```
+* Router Construction Options
+  * [linkActiveClass](https://router.vuejs.org/api/#linkactiveclass) `router-link-active`
+  * [linkExactActiveClass](https://router.vuejs.org/api/#linkexactactiveclass) `router-link-exact-active`
+    * `/src/router/index.js`
+      ```javascript
+      const router = new VueRouter({
+        linkExactActiveClass: 'my-custom-exact-active-class',
+        routes
+      });
+      ```
+    * `/src/components/TheNavigation.vue` 
+      ```html
+      <style scoped>
+      /* ... */
+      #nav a.my-custom-exact-active-class {
+        color: #42b983;
+      }
+      </style>
+      ```

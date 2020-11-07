@@ -291,3 +291,32 @@ https://vueschool.io/courses/vue-router-for-everyone
         ]
       }
     ```
+
+## Lazy load routes
+  * **Webpack code splitting feature:** This feature allows you to split your code into various bundles which can then be loaded on demand or in parallel.
+
+  * This can be achieved by removing import (view component) in `/src/routes/index.js` and using arrow function to import view in route declaration
+    * Important: We can add a name to our imported component, to make debugging easier example: `/* webpackChunkName: "brazil" */`
+    * Read more:  [Load Vue Components Asynchronously](https://vueschool.io/lessons/dynamically-load-components)
+    ```javascript
+    import Vue from "vue";
+    import VueRouter from "vue-router";
+    import Home from "../views/Home.vue";
+    // Remove this: import Brazil from "../views/Brazil.vue";
+
+    Vue.use(VueRouter);
+
+    const routes = [
+      {
+        path: "/",
+        name: "Home",
+        component: Home
+      },
+      {
+        path: "/brazil",
+        name: "brazil",
+        // Use arrow function to import view
+        component: () => import(/* webpackChunkName: "brazil" */ "../views/Brazil.vue")
+      }
+    ];
+    ```

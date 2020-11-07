@@ -155,3 +155,139 @@ https://vueschool.io/courses/vue-router-for-everyone
 
     export default router;  
     ```
+
+## Create pages and links
+
+* Example of page: `/src/views/Brazil.vue`
+  ```html
+  <template>
+    <div>
+      <h2>Brazil</h2>
+    </div>
+  </template>
+  <script>
+  export default {
+    name: "",
+    data: () => ({
+
+    })
+  }
+  </script>
+  <style lang="scss" scoped>
+  </style>
+  ```
+
+* Define route `/src/routes/index.js`:
+  ```javascript
+  import Vue from "vue";
+  import VueRouter from "vue-router";
+  import Home from "../views/Home.vue";
+  import Brazil from "../views/Brazil.vue";
+
+  Vue.use(VueRouter);
+
+  const routes = [
+    {
+      path: "/",
+      name: "Home",
+      component: Home
+    },
+    {
+      path: "/brazil",
+      name: "brazil",
+      component: Brazil
+    }
+  ];
+  ```
+
+* Create link in `/src/App.vue`:
+  ```html
+  <div id="nav">
+    <router-link to="/">Home</router-link>
+    <router-link to="/brazil">Brazil</router-link>
+    <router-link :to="brazil">Brazil</router-link>
+  </div>
+  ```
+
+## Lesson: Creating routes
+
+  * `/src/views/Home.vue`
+    ```html
+    <template>
+      <div class="home">
+
+        <h1>
+          All Destinations
+        </h1>
+
+        <div class="destinations">
+          <div v-for="destination in destinations" :key="destination.slug">
+            <router-link :to="destination.slug">
+              {{ destination.name }}
+            </router-link>
+
+            <figure>
+              <router-link :to="destination.slug">
+                <img :src="require(`@/assets/${destination.image}`)"
+                :alt="destination.name" />
+              </router-link>
+            </figure>
+          </div>
+        </div>
+
+      </div>
+    </template>
+
+    <script>
+    // @ is an alias to /src
+    import store from "@/store";
+
+    export default {
+      name: "Home",
+      data() {
+        return {
+          destinations: store.destinations
+        }
+      }
+    };
+    </script>
+    <style scoped>
+      .home {
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+      img {
+        max-width: 200px;
+      }
+      .destinations {
+        display: flex;
+        justify-content: space-between;
+      }
+    </style>
+    ```
+  * `/store.vue`
+    ```javascript
+    // /store.js
+    export default {
+      user: null,
+      destinations: [
+        {
+          name: "Brazil",
+          slug: "brazil",
+          image: "brazil.jpg",
+          id: 1,
+          description:
+            "all about Brazil, suspendisse lobortis pharetra tempor...",
+          experiences: [
+            {
+              name: "Iguaçu Falls",
+              slug: "iguacu-falls",
+              image: "iguacu-falls.jpg",
+              description:
+                "Suspendisse lobortis pharetra tempor..."
+            }
+          }
+          // ... more destinations
+        ]
+      }
+    ```

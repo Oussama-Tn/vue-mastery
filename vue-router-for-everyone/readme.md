@@ -383,7 +383,7 @@ https://vueschool.io/courses/vue-router-for-everyone
         routes
       });
       ```
-    * `/src/components/TheNavigation.vue` 
+    * `/src/components/TheNavigation.vue`
       ```html
       <style scoped>
       /* ... */
@@ -392,3 +392,22 @@ https://vueschool.io/courses/vue-router-for-everyone
       }
       </style>
       ```
+
+## Named Routes and Params
+
+* Named routes are highly recommended as they allow us to do changes to the URL without the need for refactoring the links in our apps.
+
+* Destinations links:
+  ```javascript
+  <router-link :to="{ name: 'DestinationDetails', params: {id:destination.id}}">
+    {{ destination.name }}
+  </router-link>
+  ```
+* Details page: We can access the global `$route` object
+  ```html
+  <template>
+    <div>
+      <h2>Destination id: {{ this.$route.params.id }}</h2>
+    </div>
+  </template>
+  ```

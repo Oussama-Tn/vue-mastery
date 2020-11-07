@@ -1,10 +1,10 @@
 <template>
   <div id="nav">
     <router-link to="/">Home</router-link>
-    <router-link to="/brazil">Brazil</router-link>
-    <router-link to="/hawaii">Hawaii</router-link>
-    <router-link to="/jamaica">Jamaica</router-link>
-    <router-link to="/panama">Panma</router-link>
+    <router-link :to="{ name: 'brazil' }">Brazil</router-link>
+    <router-link :to="{ name: 'hawaii' }">Hawaii</router-link>
+    <router-link :to="{ name: 'jamaica' }">Jamaica</router-link>
+    <router-link :to="{ name: 'panama' }">Panma</router-link>
   </div>
 </template>
 

@@ -715,3 +715,24 @@ https://vueschool.io/courses/vue-router-for-everyone
   };
   </script>
   ```
+
+## Create route transitions with Vue Router
+
+* In `/src/App.vue`
+  ```html
+  <template>
+    <transition name="fade">
+      <router-view :key="$route.path" />
+    </transition>
+  </template>
+  <style>
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 0.2s;
+  }
+  .fade-enter,
+  .fade-leave-to {
+    opacity: 0;
+  }
+  </style>
+  ```

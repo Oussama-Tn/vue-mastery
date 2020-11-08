@@ -672,3 +672,46 @@ https://vueschool.io/courses/vue-router-for-everyone
   };
   </script>
   ```
+
+## GoBack button
+
+* `/src/compontents/GoBack.vue`
+  ```javascript
+  <template>
+    <span class="go-back">
+      <button @click="goBack">Go Back</button>
+    </span>
+  </template>
+
+  <script>
+  export default {
+    name: "GoBack",
+    methods: {
+      goBack() {
+        return this.$router.go(-1);
+      }
+    }
+  };
+  </script>
+  ```
+
+* Include the new component inside our DestinationDetails `/src/views/DestinationDetails.vue`
+  ```javascript
+  <template>
+    <div>
+      <GoBack />
+      //...
+    </div>
+  </template>
+  <script>
+  import GoBack from "@/components/GoBack"
+
+  export default {
+    name: "DestinationDetails",
+    components: {
+      GoBack
+    },
+    //...
+  };
+  </script>
+  ```

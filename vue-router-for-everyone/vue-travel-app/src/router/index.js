@@ -12,7 +12,7 @@ const routes = [
     component: Home
   },
   {
-    path: "/details/:slug",
+    path: "/destination/:slug",
     name: "DestinationDetails",
     props: true,
     // route level code-splitting
@@ -21,7 +21,18 @@ const routes = [
     component: () =>
       import(
         /* webpackChunkName: "destinationDetails" */ "../views/DestinationDetails.vue"
-      )
+      ),
+    children: [
+      {
+        path: ":experienceSlug",
+        name: "ExperienceDetails",
+        props: true,
+        component: () =>
+          import(
+            /* webpackChunkName: "experienceDetails" */ "../views/ExperienceDetails.vue"
+          )
+      }
+    ]
   }
 ];
 

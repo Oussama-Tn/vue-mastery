@@ -576,3 +576,99 @@ https://vueschool.io/courses/vue-router-for-everyone
     routes
   });
   ```
+
+## Nested Routes
+
+* Add `children` routes in `@/router/index.js`
+  ```javascript
+  {
+    path: "/destination/:slug",
+    name: "DestinationDetails",
+    props: true,
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(
+        /* webpackChunkName: "destinationDetails" */ "../views/DestinationDetails.vue"
+      ),
+    children: [
+      {
+        path: ":experienceSlug",
+        name: "ExperienceDetails",
+        props: true,
+        component: () =>
+          import(
+            /* webpackChunkName: "experienceDetails" */ "../views/ExperienceDetails.vue"
+          )
+      }
+    ]
+  }
+  ```
+
+* `/src/views/DestinationDetails.vue`
+  ```javascript
+  <template>
+    <div>
+      <section class="destination">
+        <h1>{{ destination.name }}</h1>
+        <div class="destination-details">
+          <img
+            :src="require(`@/assets/${destination.image}`)"
+            :alt="destination.name"
+          />
+          <p>{{ destination.description }}</p>
+        </div>
+      </section>
+      <section class="experiences">
+        <h2>Top experiences in {{ destination.name }}</h2>
+        <div class="cards">
+          <div
+            v-for="experience in destination.experiences"
+            :key="experience.slug"
+            class="card"
+          >
+            <router-link
+              :to="{
+                name: 'ExperienceDetails',
+                params: { experienceSlug: experience.slug }
+              }"
+            >
+              <img
+                :src="require(`@/assets/${experience.image}`)"
+                :alt="experience.name"
+              />
+              <span class="card__text">
+                {{ experience.name }}
+              </span>
+            </router-link>
+          </div>
+        </div>
+        <router-view :key="$route.path" />
+      </section>
+    </div>
+  </template>
+  <script>
+  import store from "@/store.js";
+
+  export default {
+    name: "DestinationDetails",
+    data() {
+      return {};
+    },
+    props: {
+      slug: {
+        type: String,
+        required: true
+      }
+    },
+    computed: {
+      destination() {
+        return store.destinations.find(
+          destination => destination.slug == this.slug
+        );
+      }
+    }
+  };
+  </script>
+  ```

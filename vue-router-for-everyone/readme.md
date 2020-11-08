@@ -519,3 +519,60 @@ https://vueschool.io/courses/vue-router-for-everyone
     ```
   * [The correct way to force Vue to re-render a component - By Michael Thiessen ](https://michaelnthiessen.com/force-re-render/)
     * The best way to force Vue to re-render a component is to set a `:key` on the component. When you need the component to be re-rendered, you just change the value of the key and Vue will re-render the component.
+
+## Pass Vue Router params as props to components
+
+* Using `$route` in your component creates a tight coupling with the route which limits the flexibility of the component as it can only be used on certain URLs.
+
+
+* [Boolean Mode](https://router.vuejs.org/guide/essentials/passing-props.html#boolean-mode): When `props` is set to `true`, the `route.params` will be set as the component props.
+  * Add `props: true` to route declaration
+    ```javascript
+    {
+      path: "/details/:slug",
+      name: "DestinationDetails",
+      props: true,
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () =>
+        import(
+          /* webpackChunkName: "destinationDetails" */ "../views/DestinationDetails.vue"
+        )
+    }
+    ```
+  * Then we add `props` key to our object `/src/views/DestinationDetails.vue`
+    ```html
+    <script>
+    import store from "@/store.js"
+
+    export default {
+      name: "DestinationDetails",
+      data() {
+        return {};
+      },
+      props: {
+        slug: {
+          type: String,
+          required: true
+        }
+      },
+      computed: {
+        destination() {
+          return store.destinations.find(
+            destination => destination.slug == this.slug
+          )
+        }
+      }
+    };
+    </script>
+    ```
+
+* Use history mode to make our urls normal
+  ```javascript
+  const router = new VueRouter({
+    mode: 'history',
+    linkExactActiveClass: "my-custom-exact-active-class",
+    routes
+  });
+  ```

@@ -1,8 +1,10 @@
 <template>
   <div id="nav">
+
     <p class="logo">
       The Vue School Travel App
     </p>
+
     <ul class="nav-links">
       <li class="links">
         <router-link to="/">Home</router-link>
@@ -10,7 +12,7 @@
       <li v-for="destination in destinations" :key="destination.id" class="links">
         <router-link :to="{
           name: 'DestinationDetails',
-          params: {id: destination.id}
+          params: {slug: destination.slug}
           }">{{ destination.name }}</router-link>
       </li>
     </ul>
@@ -24,7 +26,6 @@
     name: "TheNavigation",
     data() {
       return {
-        destinationId: this.$route.params.id,
         destinations: store.destinations
       }
     }

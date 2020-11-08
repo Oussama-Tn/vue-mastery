@@ -3,15 +3,17 @@
     <section class="destination">
       <h1>{{ destination.name }}</h1>
       <div class="destination-details">
-        <img :src="require(`@/assets/${destination.image}`)"
-        :alt="destination.name" />
+        <img
+          :src="require(`@/assets/${destination.image}`)"
+          :alt="destination.name"
+        />
         <p>{{ destination.description }}</p>
       </div>
     </section>
   </div>
 </template>
 <script>
-import store from "@/store.js"
+import store from "@/store.js";
 
 export default {
   name: "DestinationDetails",
@@ -28,7 +30,7 @@ export default {
     destination() {
       return store.destinations.find(
         destination => destination.slug == this.slug
-      )
+      );
     }
   }
 };

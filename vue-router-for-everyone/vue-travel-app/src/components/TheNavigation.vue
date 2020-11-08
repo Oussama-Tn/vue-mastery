@@ -1,6 +1,5 @@
 <template>
   <div id="nav">
-
     <p class="logo">
       The Vue School Travel App
     </p>
@@ -9,27 +8,33 @@
       <li class="links">
         <router-link to="/">Home</router-link>
       </li>
-      <li v-for="destination in destinations" :key="destination.id" class="links">
-        <router-link :to="{
-          name: 'DestinationDetails',
-          params: {slug: destination.slug}
-          }">{{ destination.name }}</router-link>
+      <li
+        v-for="destination in destinations"
+        :key="destination.id"
+        class="links"
+      >
+        <router-link
+          :to="{
+            name: 'DestinationDetails',
+            params: { slug: destination.slug }
+          }"
+          >{{ destination.name }}</router-link
+        >
       </li>
     </ul>
-
   </div>
 </template>
 <script>
-  import store from '@/store'
+import store from "@/store";
 
-  export default {
-    name: "TheNavigation",
-    data() {
-      return {
-        destinations: store.destinations
-      }
-    }
+export default {
+  name: "TheNavigation",
+  data() {
+    return {
+      destinations: store.destinations
+    };
   }
+};
 </script>
 <style scoped>
 #nav {

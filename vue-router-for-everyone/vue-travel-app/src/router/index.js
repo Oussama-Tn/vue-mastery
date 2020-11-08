@@ -26,7 +26,7 @@ const routes = [
 ];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   linkExactActiveClass: "my-custom-exact-active-class",
   routes
 });

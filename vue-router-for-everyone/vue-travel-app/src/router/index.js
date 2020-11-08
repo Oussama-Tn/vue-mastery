@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import store from "@/store";
 
 Vue.use(VueRouter);
 
@@ -20,7 +21,7 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(
-        /* webpackChunkName: "destinationDetails" */ "../views/DestinationDetails.vue"
+        /* webpackChunkName: "DestinationDetails" */ "../views/DestinationDetails.vue"
       ),
     children: [
       {
@@ -29,10 +30,27 @@ const routes = [
         props: true,
         component: () =>
           import(
-            /* webpackChunkName: "experienceDetails" */ "../views/ExperienceDetails.vue"
+            /* webpackChunkName: "ExperienceDetails" */ "../views/ExperienceDetails.vue"
           )
       }
-    ]
+    ],
+    beforeEnter: (to, from, next) => {
+      const exists = store.destinations.find(
+        destination => destination.slug === to.params.slug
+      );
+      if (exists) {
+        next();
+      } else {
+        next({ name: "NotFound" });
+      }
+    }
+  },
+  {
+    path: "/404",
+    alias: "*",
+    name: "NotFound",
+    component: () =>
+      import(/* webpackChunkName: "NotFound" */ "../views/NotFound.vue")
   }
 ];
 

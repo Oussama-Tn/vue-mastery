@@ -736,3 +736,72 @@ https://vueschool.io/courses/vue-router-for-everyone
   }
   </style>
   ```
+
+## Create a 404 Not Found route and page with Vue Router
+
+* `/src/views/NotFound.vue`
+  ```html
+  <template>
+    <div>
+      <h1>Not Found</h1>
+      <p>
+        Oops! We coudn't fund that page. Try going
+        <router-link :to="{ name: 'Home' }">home</router-link>
+      </p>
+    </div>
+  </template>
+  ```
+
+* `beforeEnter` and `NotFound` view
+  ```javascript
+  const routes = [
+    {
+      path: "/",
+      name: "Home",
+      props: true,
+      component: Home
+    },
+    {
+      path: "/destination/:slug",
+      name: "DestinationDetails",
+      props: true,
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () =>
+        import(
+          /* webpackChunkName: "DestinationDetails" */ "../views/DestinationDetails.vue"
+        ),
+      children: [
+        {
+          path: ":experienceSlug",
+          name: "ExperienceDetails",
+          props: true,
+          component: () =>
+            import(
+              /* webpackChunkName: "ExperienceDetails" */ "../views/ExperienceDetails.vue"
+            )
+        }
+      ],
+      beforeEnter: (to, from, next) => {
+        const exists = store.destinations.find(
+          destination => destination.slug === to.params.slug
+        );
+        if (exists) {
+          next();
+        } else {
+          next({ name: "NotFound" });
+        }
+      }
+    },
+    {
+      path: "/404",
+      alias: "*",
+      name: "NotFound",
+      component: () =>
+      import (
+        /* webpackChunkName: "NotFound" */ "../views/NotFound.vue"
+      )
+    }
+  ];
+  ```

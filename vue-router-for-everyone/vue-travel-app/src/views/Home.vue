@@ -27,7 +27,7 @@
   </div>
 </template>
 
-<script>
+<script scoped>
 // @ is an alias to /src
 import store from "@/store";
 
@@ -51,5 +51,13 @@ img {
 .destinations {
   display: flex;
   justify-content: space-between;
+}
+a {
+  color: lightseagreen;
+  text-decoration: none;
+}
+a:hover,
+a:visited {
+  text-decoration: underline;
 }
 </style>

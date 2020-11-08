@@ -471,3 +471,51 @@ https://vueschool.io/courses/vue-router-for-everyone
   };
   </script>
   ```
+
+## Rerender Components when vue router params changes
+
+* Generate our nav dinamically from `sotre`
+  ```javascript
+  <template>
+    <div id="nav">
+      <p class="logo">
+        The Vue School Travel App
+      </p>
+      <ul class="nav-links">
+        <li class="links">
+          <router-link to="/">Home</router-link>
+        </li>
+        <li v-for="destination in destinations" :key="destination.id" class="links">
+          <router-link :to="{
+            name: 'DestinationDetails',
+            params: {id: destination.id}
+            }">{{ destination.name }}</router-link>
+        </li>
+      </ul>
+
+    </div>
+  </template>
+  <script>
+    import store from '@/store'
+
+    export default {
+      name: "TheNavigation",
+      data() {
+        return {
+          destinationId: this.$route.params.id,
+          destinations: store.destinations
+        }
+      }
+    }
+  </script>
+  <style scoped>
+  ```
+* Now we have to rerender the router view component by adding `:key`:
+    ```html
+      <div id="app">
+        <TheNavigation />
+        <router-view :key="$route.path"/>
+      </div>
+    ```
+  * [The correct way to force Vue to re-render a component - By Michael Thiessen ](https://michaelnthiessen.com/force-re-render/)
+    * The best way to force Vue to re-render a component is to set a `:key` on the component. When you need the component to be re-rendered, you just change the value of the key and Vue will re-render the component.
